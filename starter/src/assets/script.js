@@ -165,26 +165,19 @@ function emptyCart() {
 let totalPaid = 0;
 
 function pay(amount) {
-  //all products in the cart
-  const fullCost = cartTotal();
+  totalPaid += amount;
+  let remaining = cartTotal() - totalPaid;
 
-  //the amount paid by customer
-  totalPaid = amount;
-
-  //if amount the customer paid is less than cart total
-  if (amount < fullCost) {
-    return -(fullCost - amount);
-
-    //if cart total is less than amount customer paid
-  } else if (fullCost < amount) {
-    return amount - fullCost;
-
-    //if cart total and customer amount is the same
-
-  } else if (fullCost === amount) {
-    return 0;
+  if (remaining >= 0) {
+    emptyCart();
+    return remaining;
+  } else {
+    emptyCart();
+    return -remaining;
   }
 }
+
+
 
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
