@@ -66,6 +66,7 @@ function addProductToCart(productId) {
       cartItem.quantity += 1;
     } else {
       cart.push(getProduct);
+      getProduct.quantity = 1;
     }
   }
 }
@@ -161,12 +162,31 @@ function emptyCart() {
   - pay will return a positive number if money should be returned to customer
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
+let totalPaid = 0;
 
 function pay(amount) {
-  const fullTotal = cartTotal();
-  const checkBalance = amount - fullTotal;
-  return checkBalance;
+  //all products in the cart
+  const fullCost = cartTotal();
+
+  //the amount paid by customer
+  totalPaid = amount;
+
+  //if amount the customer paid is less than cart total
+  if (amount < fullCost) {
+    return -(fullCost - amount);
+
+    //if cart total is less than amount customer paid
+  } else if (fullCost < amount) {
+    return amount - fullCost;
+
+    //if cart total and customer amount is the same
+
+  } else if (fullCost === amount) {
+    return 0;
+  }
 }
+
+
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
 /* The following is for running unit tests. 
